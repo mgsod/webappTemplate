@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <!--ios-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!--Android-->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="/static/logo.png"/>
+  <link href="/static/logo.png" rel="shortcut icon"/>
+  <title>loan</title>
+</head>
+<body>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+<script>
+  //设置根节点font-size
+  (function (doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        //var clientWidth = docEl.clientWidth;
+        var rem = docEl.clientWidth / 10;
+        if (!rem) return;
+        //docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+        docEl.style.fontSize = rem + 'px';
+      };
+    recalc();
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  })(document, window);
+
+  //禁止缩放
+  (function () {
+    window.onload = function () {
+      document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      });
+      var lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false)
+    }
+  })()
+
+</script>
+</html>
